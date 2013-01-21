@@ -130,7 +130,15 @@ public class SearchMethodsTest extends FacebookTestBase {
             System.out.println(location);
         }
     }
-    
+
+    @Test
+    public void searchPages() throws Exception {
+        ResponseList<Page> pages = facebook1.searchPages("platform", new Reading().limit(5));
+        for (Page page: pages) {
+            System.out.println(page);
+        }
+    }
+
     @Test
     public void search() throws Exception {
         ResponseList<JSONObject> results = facebook1.search("orange");
