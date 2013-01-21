@@ -56,4 +56,26 @@ public class PageMethodsTest extends FacebookTestBase {
         System.out.println(page);
     }
 
+    @Test
+    public void getPage() throws Exception {
+        String pageId = "19292868552"; //The Page for Facebook Platform
+        Page page = facebook1.getPage(pageId);
+        assertThat(page, is(notNullValue()));
+        assertThat(page.getId(), is("19292868552"));
+        assertThat(page.getName(), is("Facebook Developers"));
+        assertThat(page.getCategory(), is("Product/service"));
+        assertThat(page.getLink().toString(), is("http://www.facebook.com/FacebookDevelopers"));
+        assertThat(page.getWebsite().toString(), is("http://developers.facebook.com"));
+    }
+    @Test
+    public void getPage_withReading() throws Exception {
+        String pageId = "19292868552"; //The Page for Facebook Platform
+        Page page = facebook1.getPage(pageId, new Reading().fields("name"));
+        assertThat(page, is(notNullValue()));
+        assertThat(page.getId(), is("19292868552"));
+        assertThat(page.getName(), is("Facebook Developers"));
+        assertThat(page.getCategory(), is(nullValue()));
+        assertThat(page.getLink(), is(nullValue()));
+        assertThat(page.getWebsite(), is(nullValue()));
+    }
 }
